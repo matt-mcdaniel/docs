@@ -127,8 +127,12 @@ sudo service nginx restart
 ```
 
 ### Enable Ubuntu Upstart Task (Run NodeJS on reboot)
+
+Create `/etc/init/node-app` file with `775` permissions.
+
+File Contents:
 ```
-description "DomainDetective NodeJS Server"
+description "My NodeJS Server"
 author "Matt McDaniel"
 
 env PORT=3000
@@ -138,9 +142,11 @@ stop on runlevel [016]
 respawn
 
 setuid ubuntu
-chdir /var/www/domaindetective-io
+chdir /var/www/site-io
 exec node server.js
 ```
+
+To start the service, run `sudo service node-app start`.
 
 ---
 
