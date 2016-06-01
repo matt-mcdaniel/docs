@@ -126,7 +126,7 @@ Restart Nginx to load the new configuration
 sudo service nginx restart
 ```
 
-### Enable Ubuntu Upstart Task (Run NodeJS on reboot)
+## Enable Ubuntu Upstart Task (Run NodeJS on reboot)
 
 Create `/etc/init/node-app` file with `775` permissions.
 
