@@ -43,6 +43,18 @@ done
 # e.g., sudo service nginx restart
 ```
 
+### Enabling push access for a group
+By default, the user that access the server is the only one who can execute the `git push live`. Enabling pushing by a group requires changing the permissions of the bare .git repo.
+
+```
+sudo chmod -R g+ws example-com.git
+sudo chgrp -R mygroup example-com.git
+
+git config core.sharedRepository true
+```
+
+This will allow all users part of `mygroup` to properly push and take advantage of the post-receive hook.
+
 ** **Important**
 
 Make sure you have execute privelages on the `post-receive` file you just created (`chmod 700 post-receive`).
