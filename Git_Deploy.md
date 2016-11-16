@@ -24,12 +24,23 @@ sudo nano post-receive
 
 Enter the following code to run *after* push has completed
 ```
-#!/bin/sh
+#!/bin/bash
 
-# --work-tree is the location of the repo
-# --git-dir is the location of the bare git repo
-sudo git --work-tree=/var/www/example-com --git-dir=/home/username/example-com.git checkout -f
-# perform service restarts, etc.
+# testing/debugging
+# e.g., git commit --allow-empty -m 'PUSH to post-receive'
+# git push live test-branch
+
+# can push multiple git branches in one command
+# loop through branches
+# checkout last in list
+while read oldev newrev ref
+do
+  branch=`echo $ref | cut -d/ -f3`
+  sudo GIT_WORK_TREE=/var/app/clientreach-portal-test git checkout -f $branch
+done
+
+# perform service restarts
+# e.g., sudo service nginx restart
 ```
 
 **Important**
