@@ -135,6 +135,8 @@ File Contents:
 description "My NodeJS Server"
 author "Matt McDaniel"
 
+# console.log
+
 env PORT=3000
 
 start on runlevel [2345]
@@ -147,6 +149,12 @@ exec node server.js
 ```
 
 To start the service, run `sudo service node-app start`.
+
+### Accessing logs
+
+```
+tail -f /var/log/upstart/clientreach-app.log 
+```
 
 ---
 
