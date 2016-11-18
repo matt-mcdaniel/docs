@@ -135,7 +135,7 @@ File Contents:
 description "My NodeJS Server"
 author "Matt McDaniel"
 
-# console.log
+# console log
 
 env PORT=3000
 
