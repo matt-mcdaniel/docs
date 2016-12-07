@@ -35,3 +35,7 @@ tail -f /var/log/upstart/clientreach-app.log
 https://www.digitalocean.com/community/tutorials/how-to-manage-log-files-with-logrotate-on-ubuntu-12-10
 
 `sudo nano /etc/logrotate.d/upstart`
+
+## Checking logrotate status
+
+`cat /var/lib/logrotate/status | grep my-service`
