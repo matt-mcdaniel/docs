@@ -24,6 +24,8 @@ To start the service, run `sudo service node-app start`.
 
 ### Accessing logs
 
+http://upstart.ubuntu.com/cookbook/#console-log
+
 ```
 tail -f /var/log/upstart/clientreach-app.log 
 ```
