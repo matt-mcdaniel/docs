@@ -29,3 +29,9 @@ http://upstart.ubuntu.com/cookbook/#console-log
 ```
 tail -f /var/log/upstart/clientreach-app.log 
 ```
+
+### Configuring log rotation
+
+https://www.digitalocean.com/community/tutorials/how-to-manage-log-files-with-logrotate-on-ubuntu-12-10
+
+`sudo nano /etc/logrotate.d/upstart`
