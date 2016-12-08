@@ -105,6 +105,16 @@ server {
 
  ```
 
+To increase the request file size that nginx can handle, add this line to `/etc/nginx/nginx.conf`:
+
+```
+http {
+    ...
+    # 20 Megabytes, for example
+    client_max_body_size 20m;
+    ...
+}
+```
 ## Enable Server Block (copy to sites-enabled)
 
 **Important**
