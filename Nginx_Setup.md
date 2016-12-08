@@ -68,19 +68,31 @@ You'll an to set your `server_name example.com` if you have domain you'd like to
 ```
 # the IP(s) on which your node server is running. I chose port 3000.
 upstream app_yourdomain {
-    server 127.0.0.1:3000;
+    # Point to app instances
+    server 123.45.67.89:3000 weight=100 max_fails=5 fail_timeout=300
+    server 123.45.67.89:3000 weight=100 max_fails=5 fail_timeout=300
+    # OR point to self
+    # server 127.0.0.1:3000;
     keepalive 8;
 }
 
 # the nginx server instance
+# http://stackoverflow.com/questions/5009324/node-js-nginx-what-now
 server {
-    listen 0.0.0.0:80;
+    # enable if NOT running reverse proxy (pointing to external app server)
+    # listen 0.0.0.0:80;
+    
     server_name yourdomain.com yourdomain;
     access_log /var/log/nginx/yourdomain.log;
 
     # pass the request to the node.js server with the correct headers
     # and much more can be added, see nginx config options
     location / {
+    
+      # enable https
+      if ($http_x_forwarded_proto != "https") {
+        rewrite ^(.*)$ https://$server_name$1 permanent;
+      }
       proxy_set_header X-Real-IP $remote_addr;
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header Host $http_host;
@@ -89,9 +101,8 @@ server {
       proxy_pass http://app_yourdomain/;
       proxy_redirect off;
     }
-    
-    # http://stackoverflow.com/questions/5009324/node-js-nginx-what-now
  }
+
  ```
 
 ## Enable Server Block (copy to sites-enabled)
